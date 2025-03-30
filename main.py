@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, QWidget,
     QTextEdit, QLineEdit, QPushButton, QInputDialog
 )
-from fpdf import FPDF, XPos, YPos
+from fpdf import FPDF
 
 # API KEY
 dotenv.load_dotenv()
