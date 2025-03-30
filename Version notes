@@ -1,0 +1,5 @@
+V 1.0 - Basic GUI, AI Integration. Existing issues/bugs: ai(assistant) provides it's assumption in both chat with user(patient) and in the pdf. The "near diagnoses" is not provided in the assumption, only the report of the conversation.
+V 1.2 - Chatbot issues fixed. Prompt fully altered and refined. All the details in pdf now are copy/pasted.
+V 1.3 - The answers are no longer copied into the PDF. Solution: Separate .json is created to store the conversation information. AI afterwards passes reads the .json instead and constructs the pdf accordingly.
+
+Remaining issue now: PDF has some visual issues, faulty UX.
