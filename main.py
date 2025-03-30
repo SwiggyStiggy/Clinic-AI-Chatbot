@@ -217,31 +217,40 @@ class ChatWindow(QMainWindow):
         pdf.add_page()
 
         pdf.set_font("Helvetica", "B", 16)
-        pdf.cell(0, 10, "Clinic AI Chatbot Report", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
+        pdf.cell(0, 10, "Clinic AI Chatbot Report", ln=True, align="C")
 
         pdf.set_font("Helvetica", "", 12)
-        for key, value in extracted_info.items():
-            pdf.cell(0, 10, f"{key}: {value}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        max_width = pdf.w - 2 * pdf.l_margin
 
-        pdf.ln(5)
+        
+        for key, value in extracted_info.items():
+            pdf.set_font("Helvetica", "B", 12)
+            pdf.cell(0, 6, f"{key}:", ln=True)
+            pdf.set_font("Helvetica", "", 12)
+            pdf.multi_cell(max_width, 6, value)
+            pdf.ln(2)
+
+        
         pdf.set_font("Helvetica", "B", 14)
-        pdf.cell(0, 10, "Chat Transcript:", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        pdf.cell(0, 10, "Chat Transcript:", ln=True)
 
         pdf.set_font("Helvetica", "", 10)
-        max_width = pdf.w - 2 * pdf.l_margin  # Calculate available width
+        pdf.ln(2)
 
-        # Add chat transcript line by line.
         for line in chat_transcript.split("\n"):
             clean_line = line.strip()
             if clean_line:
-                pdf.multi_cell(max_width, 10, clean_line, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+                pdf.multi_cell(max_width, 6, clean_line)
+                pdf.ln(2)
 
-        # Leave a gap before AI's Assumptions.
+
+        
         pdf.ln(5)
         pdf.set_font("Helvetica", "B", 14)
-        pdf.cell(0, 10, "AI's Assumptions (Near Diagnosis):", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        pdf.cell(0, 10, "AI's Assumptions (Near Diagnosis):", ln=True)
+
         pdf.set_font("Helvetica", "", 10)
-        pdf.multi_cell(max_width, 10, assumptions, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        pdf.multi_cell(max_width, 6, assumptions)
 
         pdf.output("clinic_chatbot_report.pdf")
 
