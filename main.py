@@ -209,7 +209,6 @@ class ChatWindow(QMainWindow):
         
         chat_transcript = self.chat_history.toPlainText()
 
-        # Generate the PDF report.
         self.generate_pdf_report(extracted_info, chat_transcript, assumptions)
 
     def generate_pdf_report(self, extracted_info, chat_transcript, assumptions):
@@ -217,16 +216,13 @@ class ChatWindow(QMainWindow):
         pdf.set_auto_page_break(auto=True, margin=15)
         pdf.add_page()
 
-        # Header
         pdf.set_font("Helvetica", "B", 16)
         pdf.cell(0, 10, "Clinic AI Chatbot Report", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
 
         pdf.set_font("Helvetica", "", 12)
-        # Extracted Information Section
         for key, value in extracted_info.items():
             pdf.cell(0, 10, f"{key}: {value}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
-        # Leave a gap before the chat transcript.
         pdf.ln(5)
         pdf.set_font("Helvetica", "B", 14)
         pdf.cell(0, 10, "Chat Transcript:", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
